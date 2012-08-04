@@ -44,10 +44,8 @@ void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_
 	v11 = (v11 < 0.0) ? v11 - 0.5 : v11 + 0.5;
 	*cal_z = (signed int)v11;
 
-	if (sub_10003400(0, 0, *cal_z)) {
-		do {
-			*cal_z = *cal_z - ((((*cal_z <= 0) - 1) & 2) - 1);
-		} while ( sub_10003400(0, 0, *cal_z) );
+	while (sub_10003400(0, 0, *cal_z)) {
+		*cal_z = *cal_z - ((((*cal_z <= 0) - 1) & 2) - 1);
 	}
 
 
@@ -55,10 +53,8 @@ void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_
 	v13 = (v13 < 0.0) ? v13 - 0.5 : v13 + 0.5;
 	*cal_x = (int)v13;
 
-	if ( sub_10003400(*cal_x, 0, *cal_z) ) {
-		do {
-			*cal_x = *cal_x - ((((*cal_x <= 0) - 1) & 2) - 1);
-		} while ( sub_10003400(*cal_x, 0, *cal_z) );
+	while (sub_10003400(*cal_x, 0, *cal_z)) {
+		*cal_x = *cal_x - ((((*cal_x <= 0) - 1) & 2) - 1);
 	}
 
 
@@ -66,10 +62,8 @@ void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_
 	v16 = (v16 < 0.0) ? v16 - 0.5 : v16 + 0.5;
 	*cal_y = (int)v16;
 
-	if (sub_10003400(*cal_x, *cal_y, *cal_z)) {
-		do {
-			*cal_y = *cal_y - ((((*cal_y <= 0) - 1) & 2) - 1);
-		} while (sub_10003400(*cal_x, *cal_y, *cal_z));
+	while (sub_10003400(*cal_x, *cal_y, *cal_z)) {
+		*cal_y = *cal_y - ((((*cal_y <= 0) - 1) & 2) - 1);
 	}
 }
 
