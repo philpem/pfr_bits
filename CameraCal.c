@@ -1,30 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int sub_10003400(int a1, int a2, signed int a3)
+int CamCalRangeCheck(int cal_x, int cal_y, int cal_z)
 {
-	if (abs(a1) > 40)
+	if (abs(cal_x) > 40)
 		return 1;
 
-	if (abs(a2) > 40)
+	if (abs(cal_y) > 40)
 		return 2;
 
-	if (a3 > 80)
+	if (cal_z > 80)
 		return 3;
 
-	if (a3 < -50)
+	if (cal_z < -50)
 		return 4;
 
-	if (((a3 / 2) + abs(a1)) > 40)
+	if (((cal_z / 2) + abs(cal_x)) > 40)
 		return 5;
 
-	if (((a3 / 2) + abs(a2)) > 40)
+	if (((cal_z / 2) + abs(cal_y)) > 40)
 		return 6;
 
 	return 0;
 }
 
-void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_cyan, signed int y2_green, int *cal_x, int *cal_y, signed int *cal_z)
+void CameraCalibrate(int x1_yellow, int y1_magenta, int x2_cyan, int y2_green, int *cal_x, int *cal_y, int *cal_z)
 {
 	double v8; // st7@2
 	double v9; // st6@2
@@ -44,7 +44,7 @@ void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_
 	v11 = (v11 < 0.0) ? v11 - 0.5 : v11 + 0.5;
 	*cal_z = (signed int)v11;
 
-	while (sub_10003400(0, 0, *cal_z)) {
+	while (CamCalRangeCheck(0, 0, *cal_z)) {
 		*cal_z = (*cal_z <= 0) ? *cal_z + 1 : *cal_z - 1;
 	}
 
@@ -53,7 +53,7 @@ void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_
 	v13 = (v13 < 0.0) ? v13 - 0.5 : v13 + 0.5;
 	*cal_x = (int)v13;
 
-	while (sub_10003400(*cal_x, 0, *cal_z)) {
+	while (CamCalRangeCheck(*cal_x, 0, *cal_z)) {
 		*cal_x = (*cal_x <= 0) ? *cal_x + 1 : *cal_x - 1;
 	}
 
@@ -62,7 +62,7 @@ void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_
 	v16 = (v16 < 0.0) ? v16 - 0.5 : v16 + 0.5;
 	*cal_y = (int)v16;
 
-	while (sub_10003400(*cal_x, *cal_y, *cal_z)) {
+	while (CamCalRangeCheck(*cal_x, *cal_y, *cal_z)) {
 		*cal_y = (*cal_y <= 0) ? *cal_y + 1 : *cal_y - 1;
 	}
 }
