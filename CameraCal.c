@@ -45,7 +45,7 @@ void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_
 	*cal_z = (signed int)v11;
 
 	while (sub_10003400(0, 0, *cal_z)) {
-		*cal_z = *cal_z - ((((*cal_z <= 0) - 1) & 2) - 1);
+		*cal_z = (*cal_z <= 0) ? *cal_z + 1 : *cal_z - 1;
 	}
 
 
@@ -54,7 +54,7 @@ void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_
 	*cal_x = (int)v13;
 
 	while (sub_10003400(*cal_x, 0, *cal_z)) {
-		*cal_x = *cal_x - ((((*cal_x <= 0) - 1) & 2) - 1);
+		*cal_x = (*cal_x <= 0) ? *cal_x + 1 : *cal_x - 1;
 	}
 
 
@@ -63,7 +63,7 @@ void CameraCalibrate(signed int x1_yellow, signed int y1_magenta, signed int x2_
 	*cal_y = (int)v16;
 
 	while (sub_10003400(*cal_x, *cal_y, *cal_z)) {
-		*cal_y = *cal_y - ((((*cal_y <= 0) - 1) & 2) - 1);
+		*cal_y = (*cal_y <= 0) ? *cal_y + 1 : *cal_y - 1;
 	}
 }
 
